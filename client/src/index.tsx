@@ -85,18 +85,6 @@ async function init() {
     };
 
     return (
-    //   <div>
-    //     <form onSubmit={onSubmit}>
-    //       <input ref={usernameRef} required /> says:
-    //       <input ref={contentRef} required /> <input type="submit" />
-    //     </form>
-    //     {messages.map(([k, v]) => (
-    //       <div key={k}>
-    //         <b>{v.from}: </b>
-    //         {v.content}
-    //       </div>
-    //     ))}
-    //   </div>
     <div style={{
         display: 'flex',
         flexDirection: 'column',
