@@ -85,17 +85,79 @@ async function init() {
     };
 
     return (
-      <div>
-        <form onSubmit={onSubmit}>
-          <input ref={usernameRef} required /> says:
-          <input ref={contentRef} required /> <input type="submit" />
+    //   <div>
+    //     <form onSubmit={onSubmit}>
+    //       <input ref={usernameRef} required /> says:
+    //       <input ref={contentRef} required /> <input type="submit" />
+    //     </form>
+    //     {messages.map(([k, v]) => (
+    //       <div key={k}>
+    //         <b>{v.from}: </b>
+    //         {v.content}
+    //       </div>
+    //     ))}
+    //   </div>
+    <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '600px',
+        margin: '0 auto',
+        padding: '1rem',
+        border: '1px solid #dcdcdc',
+        borderRadius: '5px',
+        backgroundColor: '#f9f9f9',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+      }}>
+        <div style={{ flex: '1 1 auto', overflowY: 'auto', marginBottom: '1rem' }}>
+          {messages.map(([k, v]) => (
+            <div key={k} style={{ padding: '0.5rem', borderBottom: '1px solid #dcdcdc' }}>
+              <b style={{ color: '#007bff' }}>{v.from}: </b>
+              <span style={{ wordWrap: 'break-word' }}>{v.content}</span>
+            </div>
+          ))}
+        </div>
+        <form onSubmit={onSubmit} style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+          borderTop: '1px solid #dcdcdc',
+          paddingTop: '1rem',
+        }}>
+          <input
+            ref={usernameRef}
+            required
+            placeholder="Username"
+            style={{
+              padding: '0.5rem',
+              border: '1px solid #dcdcdc',
+              borderRadius: '3px',
+            }}
+          />
+          <textarea
+            ref={contentRef}
+            required
+            placeholder="Type your message here..."
+            rows={3}
+            style={{
+              padding: '0.5rem',
+              border: '1px solid #dcdcdc',
+              borderRadius: '3px',
+              resize: 'none',
+            }}
+          />
+          <input
+            type="submit"
+            value="Send"
+            style={{
+              padding: '0.5rem',
+              border: 'none',
+              color: 'white',
+              backgroundColor: '#007bff',
+              borderRadius: '3px',
+              cursor: 'pointer',
+            }}
+          />
         </form>
-        {messages.map(([k, v]) => (
-          <div key={k}>
-            <b>{v.from}: </b>
-            {v.content}
-          </div>
-        ))}
       </div>
     );
   }
