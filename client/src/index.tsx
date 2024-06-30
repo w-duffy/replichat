@@ -60,7 +60,7 @@ async function init() {
 
     const usernameRef = useRef<HTMLInputElement>(null);
     const contentRef = useRef<HTMLInputElement>(null);
-    
+
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       let last: Message | null = null;
@@ -107,8 +107,24 @@ async function init() {
   );
 }
 
-function listen(rep: Replicache) {
-  // TODO: add logic to listen to changes on the server
+function listen(rep: Replicache<M>) {
+  console.log('listening');
+  // Listen for pokes, and pull whenever we get one.
+  Pusher.logToConsole = true;
+  if (
+    !import.meta.env.VITE_PUBLIC_REPLICHAT_PUSHER_KEY ||
+    !import.meta.env.VITE_PUBLIC_REPLICHAT_PUSHER_CLUSTER
+  ) {
+    throw new Error('Missing PUSHER_KEY or PUSHER_CLUSTER in env');
+  }
+  const pusher = new Pusher(import.meta.env.VITE_PUBLIC_REPLICHAT_PUSHER_KEY, {
+    cluster: import.meta.env.VITE_PUBLIC_REPLICHAT_PUSHER_CLUSTER,
+  });
+  const channel = pusher.subscribe('default');
+  channel.bind('poke', async () => {
+    console.log('got poked');
+    await rep.pull();
+  });
 }
 
 await init();

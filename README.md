@@ -1,2 +1,2 @@
-# byob-starter
-Bring Your Own Backend Starter
+# RepliChat
+Realtime offline-enabled chat application against a vanilla serverless/Postgres stack with the help of Replicache
